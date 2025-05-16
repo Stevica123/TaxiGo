@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:title="Почетна"
+        android:icon="@android:drawable/ic_menu_view" />
+
+    <item
+        android:id="@+id/navigation_order"
+        android:title="Нарачки"
+        android:icon="@android:drawable/ic_menu_send" />
+
+    <item
+        android:id="@+id/navigation_history"
+        android:title="Историја"
+        android:icon="@android:drawable/ic_menu_recent_history" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:title="Профил"
+        android:icon="@android:drawable/ic_menu_myplaces" />
+
+</menu>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "995235431492",
+    "project_id": "taxigo-d4064",
+    "storage_bucket": "taxigo-d4064.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995235431492:android:f99dd6d9458e470d86a811",
+        "android_client_info": {
+          "package_name": "com.example.taxigo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX_Kc4vG-SaPUvR8q7qeln8nGWn3mHRAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
