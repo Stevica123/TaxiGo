@@ -16,7 +16,7 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Иницијација на Firebase (важно е да се повика пред FirebaseAuth.getInstance())
+
         FirebaseApp.initializeApp(this)
 
         setContentView(R.layout.activity_register)
@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
             } else if (password != confirmPassword) {
                 Toast.makeText(this, "Лозинките не се совпаѓаат", Toast.LENGTH_SHORT).show()
             } else {
-                // Креирање корисник со Firebase Authentication
+
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {

@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.gms.google-services") // без version тука ако го стави во project-level buildscript
+    id("com.google.gms.google-services")
 }
 
 android {

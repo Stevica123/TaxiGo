@@ -1,5 +1,5 @@
 <resources>
-    <!-- Твојот веќе постоечки стилови -->
+
 
     <style name="Widget.BottomNavigationView.Rounded" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance.BottomNavView</item>

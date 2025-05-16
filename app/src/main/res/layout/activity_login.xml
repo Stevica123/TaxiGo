@@ -7,15 +7,7 @@
     android:background="@drawable/background_image"
     tools:context=".login.LoginActivity">
 
-    <!-- Наслов -->
 
-    <!-- Емаил -->
-
-    <!-- Лозинка -->
-
-    <!-- Копче за најавување -->
-
-    <!-- Текст за регистрација -->
     <TextView
         android:id="@+id/loginTitle"
         android:layout_width="wrap_content"

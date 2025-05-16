@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Header -->
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -41,14 +41,14 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Content placeholder -->
+
     <FrameLayout
         android:id="@+id/homeContentFrame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- Bottom Navigation with Rounded Style -->
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
