@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
@@ -16,7 +17,6 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         FirebaseApp.initializeApp(this)
 
         setContentView(R.layout.activity_register)
@@ -27,6 +27,13 @@ class RegisterActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val confirmPasswordEditText = findViewById<EditText>(R.id.confirmPasswordEditText)
         val registerButton = findViewById<Button>(R.id.registerButton)
+
+        val goToLoginText = findViewById<TextView>(R.id.goToLoginText)
+        goToLoginText.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         registerButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -43,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Успешна регистрација", Toast.LENGTH_SHORT).show()
-                            // Оди на LoginActivity после успешна регистрација
+
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                             finish()
