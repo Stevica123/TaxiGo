@@ -12,7 +12,20 @@
           "package_name": "com.example.taxigo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "995235431492-i2m9smo7ns8pbgnn6i2pkb25g6l99qbc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taxigo",
+            "certificate_hash": "f5fc4f4c1821af1eb11ac9b00f1707da5ebae017"
+          }
+        },
+        {
+          "client_id": "995235431492-3u18lt3b0q5oruhg3t6bve39bqntvt7j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBX_Kc4vG-SaPUvR8q7qeln8nGWn3mHRAM"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995235431492-3u18lt3b0q5oruhg3t6bve39bqntvt7j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

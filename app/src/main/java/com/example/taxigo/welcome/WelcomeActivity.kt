@@ -12,6 +12,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         val loginButton = findViewById<Button>(R.id.loginButton)
         val registerButton = findViewById<Button>(R.id.registerButton)
+        val anonymousButton = findViewById<Button>(R.id.anonymousLoginButton)
 
         loginButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -20,6 +21,10 @@ class WelcomeActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+        anonymousButton.setOnClickListener {
+            val intent = Intent(this, AnonymousActivity::class.java)
             startActivity(intent)
         }
     }
