@@ -11,6 +11,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaxiGo">
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="fb9689005811195946" />
+            </intent-filter>
+
+        </activity>
+
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider9689005811195946"
+            android:exported="true" />
+
+
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
@@ -20,14 +46,12 @@
             </intent-filter>
         </activity>
 
+
         <activity android:name=".LoginActivity" android:exported="false" />
         <activity android:name=".RegisterActivity" android:exported="false" />
         <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".AnonymousActivity" android:exported="false" />
 
-
     </application>
 
 </manifest>
-
-

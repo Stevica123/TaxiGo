@@ -48,6 +48,13 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.android.gms:play-services-auth:20.6.0")
+    implementation("com.facebook.android:facebook-login:12.3.0")
+    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.7.1")
+    implementation ("com.google.firebase:firebase-auth-ktx:22.1.1")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
+
 
 
 }
