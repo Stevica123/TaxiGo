@@ -7,39 +7,7 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Header -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        android:backgroundTint="#FFFFFF">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/taxigo_logo"
-                android:contentDescription="TaxiGo Logo"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TaxiGo"
-                android:textColor="#333333"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
     <!-- Fake Map Card -->
     <androidx.cardview.widget.CardView
@@ -137,18 +105,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_nav_background"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:itemTextColor="@color/nav_item_color_selector"
-        app:itemIconTint="@color/nav_item_color_selector"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+
 
 </LinearLayout>

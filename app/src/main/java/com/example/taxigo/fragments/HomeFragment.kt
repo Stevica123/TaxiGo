@@ -27,13 +27,13 @@ class HomeFragment : Fragment() {
 
         simulateVehicleCountChange()
 
-        // Копче нарaчај
+
         val btnOrderTaxi = view.findViewById<Button>(R.id.btnOrderTaxi)
         btnOrderTaxi.setOnClickListener {
-            // Отвори OrderFragment
+
             val orderFragment = OrderFragment()
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, orderFragment)  // Сменете го fragment_container со ID-то од вашиот layout
+                .replace(R.id.fragment_container, orderFragment)
                 .addToBackStack(null)
                 .commit()
         }
