@@ -70,6 +70,14 @@ class OrderFragment : Fragment() {
                 .add(orderData)
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "Нарачката е успешно испратена!", Toast.LENGTH_SHORT).show()
+
+
+                    val bottomNavigationView =
+                        requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                            R.id.bottomNavigationView
+                        )
+                    bottomNavigationView.selectedItemId = R.id.menu_history
+
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, HistoryFragment())
                         .addToBackStack(null)

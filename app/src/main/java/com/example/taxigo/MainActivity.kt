@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
                     openFragment(OrderFragment())
                     true
                 }
+                R.id.menu_history ->{
+                    openFragment(HistoryFragment())
+                    true
+                }
                 R.id.menu_profile -> {
                     openFragment(ProfileFragment())
                     true

@@ -27,15 +27,10 @@ class HistoryFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         adapter = OrderAdapter(orders) { orderToCancel ->
-            db.collection("orders")
-                .whereEqualTo("vehicleNumber", orderToCancel.vehicleNumber)
-                .whereEqualTo("address", orderToCancel.address)
-                .whereEqualTo("arrivalTime", orderToCancel.arrivalTime)
-                .get()
-                .addOnSuccessListener { documents ->
-                    for (doc in documents) {
-                        db.collection("orders").document(doc.id).delete()
-                    }
+
+            db.collection("orders").document(orderToCancel.id)
+                .delete()
+                .addOnSuccessListener {
                     orders.remove(orderToCancel)
                     adapter.notifyDataSetChanged()
                     Toast.makeText(requireContext(), "Нарачката е откажана", Toast.LENGTH_SHORT).show()
@@ -53,8 +48,8 @@ class HistoryFragment : Fragment() {
             .addOnSuccessListener { result ->
                 orders.clear()
                 for (document in result) {
-                    val order = document.toObject(Order::class.java)
-                    orders.add(order)
+                    val order = document.toObject(Order::class.java).copy(id = document.id)
+                    orders.add(0, order)
                 }
                 adapter.notifyDataSetChanged()
             }

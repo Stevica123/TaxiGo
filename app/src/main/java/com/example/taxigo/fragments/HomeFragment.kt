@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
 
@@ -27,7 +28,6 @@ class HomeFragment : Fragment() {
 
         simulateVehicleCountChange()
 
-
         val btnOrderTaxi = view.findViewById<Button>(R.id.btnOrderTaxi)
         btnOrderTaxi.setOnClickListener {
 
@@ -36,6 +36,11 @@ class HomeFragment : Fragment() {
                 .replace(R.id.fragment_container, orderFragment)
                 .addToBackStack(null)
                 .commit()
+
+
+            val bottomNavigationView =
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            bottomNavigationView.selectedItemId = R.id.menu_order
         }
 
         return view
