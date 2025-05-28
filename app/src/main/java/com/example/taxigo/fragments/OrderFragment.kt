@@ -1,6 +1,7 @@
 package com.example.taxigo
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +44,13 @@ class OrderFragment : Fragment() {
         val btnOrderTaxi = view.findViewById<Button>(R.id.btnOrderTaxi)
 
         btnOrderTaxi.setOnClickListener {
+
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            if (currentUser == null) {
+                Toast.makeText(requireContext(), "Ве молам најавете се за да направите нарачка.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val selectedPosition = spinnerLocations.selectedItemPosition
             if (selectedPosition == Spinner.INVALID_POSITION) {
                 Toast.makeText(requireContext(), "Ве молам, изберете локација", Toast.LENGTH_SHORT).show()
@@ -63,14 +71,14 @@ class OrderFragment : Fragment() {
             val orderData = hashMapOf(
                 "vehicleNumber" to selectedVehicle,
                 "address" to selectedStreet,
-                "arrivalTime" to arrivalTimeStr
+                "arrivalTime" to arrivalTimeStr,
+                "userId" to currentUser.uid
             )
 
             db.collection("orders")
                 .add(orderData)
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "Нарачката е успешно испратена!", Toast.LENGTH_SHORT).show()
-
 
                     val bottomNavigationView =
                         requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(

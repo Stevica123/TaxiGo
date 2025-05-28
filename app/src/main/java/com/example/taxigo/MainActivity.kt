@@ -3,6 +3,8 @@ package com.example.taxigo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.taxigo.ui.profile.ProfileFragment
+
 
 class MainActivity : AppCompatActivity() {
 

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 
+
+
 class HistoryFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
     id("com.google.gms.google-services")
 }
 
@@ -53,6 +54,10 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore-ktx:24.7.1")
     implementation ("com.google.firebase:firebase-auth-ktx:22.1.1")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    kapt("com.github.bumptech.glide:compiler:4.15.1")
+
+
 
 
 
