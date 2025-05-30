@@ -1,5 +1,6 @@
 package com.example.taxigo
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,10 +10,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.example.taxigo.utils.LocaleHelper
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+
+    override fun attachBaseContext(newBase: Context) {
+        val context = LocaleHelper.setLocale(newBase, LocaleHelper.getLanguage(newBase))
+        super.attachBaseContext(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +48,14 @@ class RegisterActivity : AppCompatActivity() {
             val confirmPassword = confirmPasswordEditText.text.toString()
 
             if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(this, "Пополнете ги сите полиња", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
             } else if (password != confirmPassword) {
-                Toast.makeText(this, "Лозинките не се совпаѓаат", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.passwords_do_not_match), Toast.LENGTH_SHORT).show()
             } else {
-
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Успешна регистрација", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.registration_successful), Toast.LENGTH_SHORT).show()
 
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
@@ -57,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                 this,
-                                "Регистрацијата не успеа: ${task.exception?.message}",
+                                getString(R.string.registration_failed, task.exception?.message ?: ""),
                                 Toast.LENGTH_LONG
                             ).show()
                         }

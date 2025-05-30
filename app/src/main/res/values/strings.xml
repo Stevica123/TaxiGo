@@ -3,4 +3,41 @@
     <string name="default_web_client_id">995235431492-3u18lt3b0q5oruhg3t6bve39bqbc.apps.googleusercontent.com</string>
     <string name="facebook_app_id">9689005811195946</string>
 
+    <string name="welcome_text">Добредојдовте на TaxiGo</string>
+    <string name="login_button">Најави се</string>
+    <string name="register_button">Регистрирај се</string>
+    <string name="anonymous_button">Продолжи како гостин</string>
+    <string name="logo_description">Лого на TaxiGo</string>
+
+    <string name="login_title">Најави се</string>
+    <string name="email_hint">Емаил</string>
+    <string name="password_hint">Лозинка</string>
+    <string name="login_button_text">Најави се</string>
+
+    <string name="google_sign_in_text">Најава со Google</string>
+    <string name="google_logo_description">Лого од Google</string>
+
+    <string name="facebook_sign_in_text">Најава со Facebook</string>
+    <string name="facebook_logo_description">Лого од Facebook</string>
+
+    <string name="go_to_register_text">Немаш профил? Регистрирај се</string>
+
+    <string name="enter_email_password">Внесете е-пошта и лозинка</string>
+    <string name="login_successful">Успешна најава</string>
+    <string name="login_failed">Неуспешна најава</string>
+
+    <string name="register_title">Регистрација</string>
+    <string name="confirm_password_hint">Потврди лозинка</string>
+    <string name="go_to_login">Веќе имаш кориснички профил? Најави се</string>
+    <string name="fill_all_fields">Пополнете ги сите полиња</string>
+    <string name="passwords_do_not_match">Лозинките не се совпаѓаат</string>
+    <string name="registration_successful">Успешна регистрација</string>
+    <string name="registration_failed">Регистрацијата не успеа: %1$s</string>
+
+    <string name="fake_map_description">Симулирана мапа</string>
+    <string name="vehicle_icon_description">Икона на возило</string>
+    <string name="available_vehicles">Достапни возила</string>
+    <string name="order_button">Нарaчај</string>
+
 </resources>
+

@@ -1,17 +1,23 @@
 package com.example.taxigo
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.taxigo.utils.LocaleHelper
 import com.example.taxigo.ui.profile.ProfileFragment
 
 
 class MainActivity : AppCompatActivity() {
 
+    override fun attachBaseContext(newBase: Context) {
+        val contextWithLocale = LocaleHelper.setLocale(newBase, LocaleHelper.getLanguage(newBase))
+        super.attachBaseContext(contextWithLocale)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_host)
-
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -19,10 +25,7 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
-
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_home -> {
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                     openFragment(OrderFragment())
                     true
                 }
-                R.id.menu_history ->{
+                R.id.menu_history -> {
                     openFragment(HistoryFragment())
                     true
                 }
@@ -45,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun openFragment(fragment: androidx.fragment.app.Fragment) {
         supportFragmentManager.beginTransaction()

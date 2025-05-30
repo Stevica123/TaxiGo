@@ -1,5 +1,6 @@
 package com.example.taxigo
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +9,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.example.taxigo.utils.LocaleHelper
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -21,12 +22,17 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.FacebookAuthProvider
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var callbackManager: CallbackManager
     private val RC_SIGN_IN = 9001
+
+    override fun attachBaseContext(newBase: Context) {
+        val context = LocaleHelper.setLocale(newBase, LocaleHelper.getLanguage(newBase))
+        super.attachBaseContext(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +45,8 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.loginButton)
         val googleSignInButton = findViewById<LinearLayout>(R.id.googleSignInButton)
         val facebookSignInButton = findViewById<LinearLayout>(R.id.facebookSignInButton)
-
         val goToRegisterText = findViewById<TextView>(R.id.goToRegisterText)
+
         goToRegisterText.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
@@ -51,17 +57,17 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Внесете емаил и лозинка", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.enter_email_password), Toast.LENGTH_SHORT).show()
             } else {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Успешна најава", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(this, "Најавата не успеа: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "${getString(R.string.login_failed)}: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                         }
                     }
             }
