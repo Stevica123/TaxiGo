@@ -39,5 +39,69 @@
     <string name="available_vehicles">Достапни возила</string>
     <string name="order_button">Нарaчај</string>
 
+    <string name="select_location">Избери локација</string>
+    <string name="select_vehicle_type">Избери тип на возило</string>
+    <string name="vehicle_classic">Класично (1-3 лица)</string>
+    <string name="vehicle_large">Поголемо (4+ лица)</string>
+    <string name="order_vehicle">Нарачај го возилото</string>
+
+    <string name="location_icon_desc">Икона за локација</string>
+    <string name="vehicle_icon_desc">Икона за возило</string>
+
+    <string name="please_login_to_order">Ве молам најавете се за да направите нарачка.</string>
+    <string name="please_select_location">Ве молам, изберете локација</string>
+    <string name="please_select_vehicle_type">Ве молам, изберете тип на возило</string>
+    <string name="order_successful">Нарачката е успешно испратена!</string>
+    <string name="order_error">Грешка при испраќање: %1$s</string>
+    <string name="minutes">минути</string>
+
+    <string-array name="bitola_streets">
+        <item>Илинденска</item>
+        <item>Климент Охридски</item>
+        <item>Македонска</item>
+        <item>Никола Карев</item>
+        <item>Даме Груев</item>
+        <item>Мирче Ацев</item>
+        <item>Јордан Хаџи Константинов-Џинот</item>
+        <item>Питу Гули</item>
+    </string-array>
+
+    <string name="vehicle_type">Тип на возило: %1$s</string>
+    <string name="address">Адреса: %1$s</string>
+    <string name="arrival_time">Време на пристигнување: %1$d %2$s</string>
+    <string name="cancel_order">Откажи</string>
+
+    <string name="order_cancelled">Нарачката е откажана</string>
+    <string name="order_cancel_error">Грешка при откажување на нарачката</string>
+    <string name="order_load_error">Грешка при вчитување на нарачките</string>
+
+    <string name="profile_name_placeholder">Име на корисник</string>
+    <string name="profile_email_placeholder">user@email.com</string>
+    <string name="profile_order_count">Вкупно нарачки: %1$d</string>
+    <string name="logout_button_text">Одјави се</string>
+    <string name="profile_picture_description">Слика на профил</string>
+
+    <string name="anonymous_user">Анонимен корисник</string>
+    <string name="google_user">Google корисник</string>
+    <string name="unknown_email">Непознат email</string>
+    <string name="email_label">Email: %1$s</string>
+    <string name="profile_id_placeholder">ID: %1$s</string>
+    <string name="order_count">Направени нарачки: %1$d</string>
+    <string name="logout_success">Успешна одјава</string>
+
+    <string name="menu_home">Почетна</string>
+    <string name="menu_order">Нарачки</string>
+    <string name="menu_history">Историја</string>
+    <string name="menu_profile">Профил</string>
+
+    <string name="header_title">TaxiGo</string>
+    <string name="logo_content_description">Лого на TaxiGo</string>
+
+    <string name="header_home">Почетна</string>
+    <string name="header_order">Нарачки</string>
+    <string name="header_history">Историја</string>
+    <string name="header_profile">Профил</string>
+
+
 </resources>
 

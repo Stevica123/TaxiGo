@@ -9,7 +9,6 @@
     android:gravity="center"
     android:background="?android:attr/windowBackground">
 
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,11 +24,10 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:padding="8dp"
-            android:contentDescription="Profile Picture"
+            android:contentDescription="@string/profile_picture_description"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_anonymous" />
     </com.google.android.material.card.MaterialCardView>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +43,7 @@
             android:id="@+id/profileNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Име на корисник"
+            android:text="@string/profile_name_placeholder"
             android:textColor="#212121"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -56,7 +54,7 @@
             android:id="@+id/profileEmailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="user@email.com"
+            android:text="@string/profile_email_placeholder"
             android:textColor="#212121"
             android:textSize="16sp"
             android:layout_gravity="center"
@@ -66,7 +64,7 @@
             android:id="@+id/profileIdText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UID: abcdef123456"
+            android:text="@string/profile_id_placeholder"
             android:textSize="14sp"
             android:textColor="#212121"
             android:layout_gravity="center"
@@ -76,23 +74,21 @@
             android:id="@+id/profileOrderCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Вкупно нарачки: 0"
+            android:text="@string/profile_order_count"
             android:textSize="16sp"
             android:textColor="#212121"
             android:layout_gravity="center" />
     </LinearLayout>
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButton"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="Одјави се"
+        android:text="@string/logout_button_text"
         style="@style/Widget.MaterialComponents.Button"
         app:cornerRadius="24dp"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:backgroundTint="@color/red_600" />
-
 
 </LinearLayout>

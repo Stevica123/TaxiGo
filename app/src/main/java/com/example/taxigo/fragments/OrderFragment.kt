@@ -1,7 +1,5 @@
 package com.example.taxigo
 
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,18 +11,22 @@ import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import org.osmdroid.util.GeoPoint
 
 class OrderFragment : Fragment() {
 
-    private val bitolaStreets = listOf(
-        "Илинденска",
-        "Климент Охридски",
-        "Македонска",
-        "Никола Карев",
-        "Даме Груев",
-        "Мирче Ацев",
-        "Јордан Хаџи Константинов-Џинот",
-        "Питу Гули"
+
+    private val streetCoordinates = mapOf(
+        "Илинденска" to GeoPoint(41.0286, 21.3328),
+        "Климент Охридски" to GeoPoint(41.0281, 21.3350),
+        "Македонска" to GeoPoint(41.0265, 21.3305),
+        "Никола Карев" to GeoPoint(41.0292, 21.3355),
+        "Даме Груев" to GeoPoint(41.0279, 21.3322),
+        "Мирче Ацев" to GeoPoint(41.0310, 21.3378),
+        "Јордан Хаџи Константинов-Џинот" to GeoPoint(41.0252, 21.3317),
+        "Питу Гули" to GeoPoint(41.0308, 21.3380)
     )
 
     override fun onCreateView(
@@ -36,6 +38,10 @@ class OrderFragment : Fragment() {
         val db = FirebaseFirestore.getInstance()
 
         val spinnerLocations = view.findViewById<Spinner>(R.id.spinnerLocations)
+
+
+        val bitolaStreets = resources.getStringArray(R.array.bitola_streets).toList()
+
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, bitolaStreets)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerLocations.adapter = adapter
@@ -47,43 +53,46 @@ class OrderFragment : Fragment() {
 
             val currentUser = FirebaseAuth.getInstance().currentUser
             if (currentUser == null) {
-                Toast.makeText(requireContext(), "Ве молам најавете се за да направите нарачка.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.please_login_to_order), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val selectedPosition = spinnerLocations.selectedItemPosition
             if (selectedPosition == Spinner.INVALID_POSITION) {
-                Toast.makeText(requireContext(), "Ве молам, изберете локација", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.please_select_location), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val selectedStreet = spinnerLocations.selectedItem.toString()
 
             val selectedVehicleId = rgVehicleType.checkedRadioButtonId
             if (selectedVehicleId == -1) {
-                Toast.makeText(requireContext(), "Ве молам, изберете тип на возило", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.please_select_vehicle_type), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val selectedVehicle = view.findViewById<RadioButton>(selectedVehicleId).text.toString()
 
+
+            val selectedCoordinates = streetCoordinates[selectedStreet]
+
             val simulatedArrivalTime = (5..15).random()
-            val arrivalTimeStr = "$simulatedArrivalTime минути"
+
 
             val orderData = hashMapOf(
                 "vehicleNumber" to selectedVehicle,
                 "address" to selectedStreet,
-                "arrivalTime" to arrivalTimeStr,
-                "userId" to currentUser.uid
+                "arrivalTime" to simulatedArrivalTime,
+                "userId" to currentUser.uid,
+                "latitude" to selectedCoordinates?.latitude,
+                "longitude" to selectedCoordinates?.longitude
             )
 
             db.collection("orders")
                 .add(orderData)
                 .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Нарачката е успешно испратена!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.order_successful), Toast.LENGTH_SHORT).show()
 
                     val bottomNavigationView =
-                        requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
-                            R.id.bottomNavigationView
-                        )
+                        requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)
                     bottomNavigationView.selectedItemId = R.id.menu_history
 
                     parentFragmentManager.beginTransaction()
@@ -92,7 +101,7 @@ class OrderFragment : Fragment() {
                         .commit()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Грешка при испраќање: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.order_error, e.message ?: ""), Toast.LENGTH_LONG).show()
                 }
         }
 

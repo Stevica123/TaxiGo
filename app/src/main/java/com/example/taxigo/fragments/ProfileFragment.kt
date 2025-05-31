@@ -45,12 +45,11 @@ class ProfileFragment : Fragment() {
             when {
                 userModel.isAnonymous -> {
                     profileImage.setImageResource(R.drawable.ic_anonymous)
-                    profileName.text = "Анонимен корисник"
+                    profileName.text = getString(R.string.anonymous_user)
                     profileEmail.text = ""
 
                     profileIdText.visibility = View.VISIBLE
-                    profileIdText.text = "ID: ${firebaseUser?.uid?.take(6) ?: "N/A"}"
-
+                    profileIdText.text = getString(R.string.profile_id_placeholder, firebaseUser?.uid?.take(6) ?: "N/A")
 
                     profileOrdersCountText.visibility = View.GONE
                 }
@@ -59,9 +58,9 @@ class ProfileFragment : Fragment() {
                     profileOrdersCountText.visibility = View.VISIBLE
                     profileIdText.visibility = View.VISIBLE
 
-                    profileName.text = userModel.name ?: "Google корисник"
-                    profileEmail.text = "Email: ${userModel.email ?: ""}"
-                    profileIdText.text = "ID: ${firebaseUser?.uid?.take(6) ?: "N/A"}"
+                    profileName.text = userModel.name ?: getString(R.string.google_user)
+                    profileEmail.text = getString(R.string.email_label, userModel.email ?: "")
+                    profileIdText.text = getString(R.string.profile_id_placeholder, firebaseUser?.uid?.take(6) ?: "N/A")
 
                     Glide.with(this)
                         .load(userModel.photoUrl)
@@ -75,14 +74,14 @@ class ProfileFragment : Fragment() {
                     profileOrdersCountText.visibility = View.VISIBLE
                     profileIdText.visibility = View.VISIBLE
 
-                    val email = userModel.email ?: "Непознат email"
+                    val email = userModel.email ?: getString(R.string.unknown_email)
                     val initial = email.firstOrNull()?.uppercaseChar() ?: '?'
                     val drawable = UserModel.generateInitialCircle(requireContext(), initial)
 
                     profileImage.setImageDrawable(drawable)
                     profileName.text = ""
-                    profileEmail.text = "Email: $email"
-                    profileIdText.text = "ID: ${firebaseUser?.uid?.take(6) ?: "N/A"}"
+                    profileEmail.text = getString(R.string.email_label, email)
+                    profileIdText.text = getString(R.string.profile_id_placeholder, firebaseUser?.uid?.take(6) ?: "N/A")
 
                     loadOrdersCount(firebaseUser?.uid)
                 }
@@ -92,7 +91,7 @@ class ProfileFragment : Fragment() {
         logoutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
 
-            Toast.makeText(requireContext(), "Успешна одјава", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.logout_success), Toast.LENGTH_SHORT).show()
 
             val intent = Intent(requireContext(), WelcomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -104,7 +103,7 @@ class ProfileFragment : Fragment() {
 
     private fun loadOrdersCount(userId: String?) {
         if (userId == null) {
-            profileOrdersCountText.text = "Направени нарачки: 0"
+            profileOrdersCountText.text = getString(R.string.order_count, 0)
             return
         }
 
@@ -113,10 +112,10 @@ class ProfileFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 val count = result.size()
-                profileOrdersCountText.text = "Направени нарачки: $count"
+                profileOrdersCountText.text = getString(R.string.order_count, count)
             }
             .addOnFailureListener {
-                profileOrdersCountText.text = "Направени нарачки: 0"
+                profileOrdersCountText.text = getString(R.string.order_count, 0)
             }
     }
 }

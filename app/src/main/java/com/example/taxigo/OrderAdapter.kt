@@ -26,9 +26,22 @@ class OrderAdapter(
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val order = orders[position]
-        holder.tvVehicleType.text = "Тип на возило: ${order.vehicleNumber}"
-        holder.tvAddress.text = "Адреса: ${order.address}"
-        holder.tvArrivalTime.text = "Време на пристигнување: ${order.arrivalTime}"
+        val context = holder.itemView.context
+
+
+        val localizedVehicleType = when (order.vehicleNumber.lowercase()) {
+            "classic" -> context.getString(R.string.vehicle_classic)
+            "large" -> context.getString(R.string.vehicle_large)
+            else -> order.vehicleNumber
+        }
+
+        holder.tvVehicleType.text = context.getString(R.string.vehicle_type, localizedVehicleType)
+        holder.tvAddress.text = context.getString(R.string.address, order.address)
+
+        val minutesText = context.getString(R.string.minutes)
+        holder.tvArrivalTime.text = context.getString(R.string.arrival_time, order.arrivalTime, minutesText)
+
+        holder.btnCancelOrder.text = context.getString(R.string.cancel_order)
 
         holder.btnCancelOrder.setOnClickListener {
             onCancelClick(order)

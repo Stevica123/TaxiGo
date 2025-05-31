@@ -27,13 +27,13 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/taxigo_logo"
-                android:contentDescription="TaxiGo Logo" />
+                android:contentDescription="@string/logo_content_description" />
 
             <TextView
                 android:id="@+id/headerTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TaxiGo"
+                android:text="@string/header_title"
                 android:textColor="#333333"
                 android:textSize="22sp"
                 android:textStyle="bold" />

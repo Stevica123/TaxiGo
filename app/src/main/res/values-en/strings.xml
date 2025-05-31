@@ -37,6 +37,70 @@
     <string name="vehicle_icon_description">Vehicle icon</string>
     <string name="available_vehicles">Available vehicles</string>
     <string name="order_button">Order</string>
-    </resources>
+
+    <string name="select_location">Select Location</string>
+    <string name="select_vehicle_type">Select Vehicle Type</string>
+    <string name="vehicle_classic">Classic (1-3 people)</string>
+    <string name="vehicle_large">Larger (4+ people)</string>
+    <string name="order_vehicle">Order Vehicle</string>
+
+    <string name="location_icon_desc">Location icon</string>
+    <string name="vehicle_icon_desc">Vehicle icon</string>
+
+
+    <string name="please_login_to_order">Please log in to place an order.</string>
+    <string name="please_select_location">Please select a location</string>
+    <string name="please_select_vehicle_type">Please select a vehicle type</string>
+    <string name="order_successful">Your order has been sent successfully!</string>
+    <string name="order_error">Error sending order: %1$s</string>
+    <string name="minutes">minutes</string>
+
+    <string-array name="bitola_streets">
+        <item>Ilindenska</item>
+        <item>Kliment Ohridski</item>
+        <item>Macedonian</item>
+        <item>Nikola Karev</item>
+        <item>Dame Gruev</item>
+        <item>Mirche Acev</item>
+        <item>Jordan Hadzi Konstantinov-Dzinot</item>
+        <item>Pitu Guli</item>
+    </string-array>
+
+    <string name="vehicle_type">Vehicle Type: %1$s</string>
+    <string name="address">Address: %1$s</string>
+    <string name="arrival_time">Arrival Time: %1$d %2$s</string>
+    <string name="cancel_order">Cancel</string>
+
+    <string name="order_cancelled">Order cancelled</string>
+    <string name="order_cancel_error">Error cancelling order</string>
+    <string name="order_load_error">Error loading orders</string>
+
+    <string name="profile_name_placeholder">User Name</string>
+    <string name="profile_email_placeholder">user@email.com</string>
+    <string name="profile_order_count">Total orders: %1$d</string>
+    <string name="logout_button_text">Logout</string>
+    <string name="profile_picture_description">Profile Picture</string>
+
+    <string name="anonymous_user">Anonymous User</string>
+    <string name="google_user">Google User</string>
+    <string name="unknown_email">Unknown email</string>
+    <string name="email_label">Email: %1$s</string>
+    <string name="profile_id_placeholder">ID: %1$s</string>
+    <string name="order_count">Total orders: %1$d</string>
+    <string name="logout_success">Logout successful</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_order">Orders</string>
+    <string name="menu_history">History</string>
+    <string name="menu_profile">Profile</string>
+
+    <string name="header_title">TaxiGo</string>
+    <string name="logo_content_description">TaxiGo logo</string>
+
+    <string name="header_home">Home</string>
+    <string name="header_order">Orders</string>
+    <string name="header_history">History</string>
+    <string name="header_profile">Profile</string>
+</resources>
 
 
