@@ -26,7 +26,65 @@
             android:layout_height="match_parent"
             android:clickable="true"
             tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.cardview.widget.CardView>
 
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true"
+        android:background="#FFFFFF">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/tipsViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingStart="48dp"
+                android:paddingEnd="48dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:overScrollMode="never"
+                android:minHeight="120dp"/>
+
+            <ImageButton
+                android:id="@+id/btnPrevTip"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/bg_tip_nav"
+                android:contentDescription="Претходен совет"
+                android:src="@drawable/ic_arrow_left"
+                android:tint="#FF5722"
+                tools:ignore="TouchTargetSizeCheck,UseAppTint" />
+
+            <ImageButton
+                android:id="@+id/btnNextTip"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/bg_tip_nav"
+                android:contentDescription="Следен совет"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="#FF5722"
+                tools:ignore="UseAppTint,TouchTargetSizeCheck" />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 
@@ -77,14 +135,16 @@
                     android:text="5"
                     android:textColor="#FF5722"
                     android:textSize="40sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/available_vehicles"
                     android:textColor="#555555"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif" />
             </LinearLayout>
 
             <Button
@@ -94,7 +154,6 @@
                 android:text="@string/order_button"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                android:backgroundTint="#FF5722"
                 android:textColor="#FFFFFF"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"

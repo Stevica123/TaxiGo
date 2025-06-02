@@ -102,6 +102,14 @@
     <string name="header_history">Историја</string>
     <string name="header_profile">Профил</string>
 
+    <string-array name="tips_array">
+        <item>Секогаш носете сигурносен појас – вашата безбедност на прво место!</item>
+        <item>Проверете дали типот на возилото што пристигнало одговара на вашата нарачка.</item>
+        <item>При завршување на возењето, проверете дали сте ги земале сите работи.</item>
+    </string-array>
+
+    <string name="previous_tip">Претходен совет</string>
+    <string name="next_tip">Следен совет</string>
 
 </resources>
 

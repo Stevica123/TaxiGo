@@ -101,6 +101,15 @@
     <string name="header_order">Orders</string>
     <string name="header_history">History</string>
     <string name="header_profile">Profile</string>
+
+    <string-array name="tips_array">
+        <item>Always wear your seatbelt – your safety comes first!</item>
+        <item>Check if the vehicle type that arrived matches your order.</item>
+        <item>At the end of the ride, make sure you’ve taken all your belongings.</item>
+    </string-array>
+
+    <string name="previous_tip">Previous Tip</string>
+    <string name="next_tip">Next Tip</string>
 </resources>
 
 
