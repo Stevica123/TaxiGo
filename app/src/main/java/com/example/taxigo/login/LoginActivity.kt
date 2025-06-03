@@ -73,6 +73,7 @@ class LoginActivity : BaseActivity() {
             }
         }
 
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -84,8 +85,10 @@ class LoginActivity : BaseActivity() {
             signInWithGoogle()
         }
 
+
         FacebookSdk.sdkInitialize(applicationContext)
         callbackManager = CallbackManager.Factory.create()
+
 
         LoginManager.getInstance().registerCallback(callbackManager,
             object : FacebookCallback<LoginResult> {
@@ -154,7 +157,12 @@ class LoginActivity : BaseActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d("LoginActivity", "Firebase Auth with Facebook successful")
-                    goToMainActivity()
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+
                 } else {
                     Log.w("LoginActivity", "Firebase Auth with Facebook failed", task.exception)
                     Toast.makeText(this, "Authentication failed with Facebook.", Toast.LENGTH_SHORT).show()
@@ -171,11 +179,5 @@ class LoginActivity : BaseActivity() {
         } else {
             Log.d("LoginActivity", "No user logged in")
         }
-    }
-
-    private fun goToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }

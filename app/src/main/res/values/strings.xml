@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">TaxiGo</string>
     <string name="default_web_client_id">995235431492-3u18lt3b0q5oruhg3t6bve39bqbc.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">9689005811195946</string>
+    <string name="facebook_app_id">676065915197005</string>
+    <string name="facebook_client_token">29a6b4baaba0f6a260ec14d65ca0cff3</string>
+
 
     <string name="welcome_text">Добредојдовте на TaxiGo</string>
     <string name="login_button">Најави се</string>

@@ -7,19 +7,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.taxigo.R
 import com.example.taxigo.WelcomeActivity
-import com.example.taxigo.models.UserModel
+import com.example.taxigo.models.*
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
     private lateinit var profileIdText: TextView
     private lateinit var profileOrdersCountText: TextView
-    private val db = FirebaseFirestore.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +29,6 @@ class ProfileFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val userModel = UserModel.fromFirebaseUser(firebaseUser)
 
         val profileImage = view.findViewById<ImageView>(R.id.profileImageView)
         val profileName = view.findViewById<TextView>(R.id.profileNameText)
@@ -41,7 +41,15 @@ class ProfileFragment : Fragment() {
         profileIdText.visibility = View.GONE
         profileOrdersCountText.visibility = View.GONE
 
+
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        val userModel = UserModel.fromFirebaseUser(firebaseUser)
+
         if (userModel != null) {
+
+            saveUserToFirestore(userModel)
+            saveUserToRoom(userModel)
+
             when {
                 userModel.isAnonymous -> {
                     profileImage.setImageResource(R.drawable.ic_anonymous)
@@ -49,31 +57,28 @@ class ProfileFragment : Fragment() {
                     profileEmail.text = ""
 
                     profileIdText.visibility = View.VISIBLE
-                    profileIdText.text = getString(R.string.profile_id_placeholder, firebaseUser?.uid?.take(6) ?: "N/A")
+                    profileIdText.text = getString(R.string.profile_id_placeholder, userModel.uid.take(6))
 
                     profileOrdersCountText.visibility = View.GONE
                 }
 
                 userModel.isGoogle -> {
-                    profileOrdersCountText.visibility = View.VISIBLE
-                    profileIdText.visibility = View.VISIBLE
-
                     profileName.text = userModel.name ?: getString(R.string.google_user)
                     profileEmail.text = getString(R.string.email_label, userModel.email ?: "")
-                    profileIdText.text = getString(R.string.profile_id_placeholder, firebaseUser?.uid?.take(6) ?: "N/A")
+                    profileIdText.text = getString(R.string.profile_id_placeholder, userModel.uid.take(6))
+
+                    profileIdText.visibility = View.VISIBLE
+                    profileOrdersCountText.visibility = View.VISIBLE
 
                     Glide.with(this)
                         .load(userModel.photoUrl)
                         .circleCrop()
                         .into(profileImage)
 
-                    loadOrdersCount(firebaseUser?.uid)
+                    loadOrdersCount(userModel.uid)
                 }
 
                 else -> {
-                    profileOrdersCountText.visibility = View.VISIBLE
-                    profileIdText.visibility = View.VISIBLE
-
                     val email = userModel.email ?: getString(R.string.unknown_email)
                     val initial = email.firstOrNull()?.uppercaseChar() ?: '?'
                     val drawable = UserModel.generateInitialCircle(requireContext(), initial)
@@ -81,18 +86,19 @@ class ProfileFragment : Fragment() {
                     profileImage.setImageDrawable(drawable)
                     profileName.text = ""
                     profileEmail.text = getString(R.string.email_label, email)
-                    profileIdText.text = getString(R.string.profile_id_placeholder, firebaseUser?.uid?.take(6) ?: "N/A")
+                    profileIdText.text = getString(R.string.profile_id_placeholder, userModel.uid.take(6))
 
-                    loadOrdersCount(firebaseUser?.uid)
+                    profileIdText.visibility = View.VISIBLE
+                    profileOrdersCountText.visibility = View.VISIBLE
+
+                    loadOrdersCount(userModel.uid)
                 }
             }
         }
 
         logoutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-
             Toast.makeText(requireContext(), getString(R.string.logout_success), Toast.LENGTH_SHORT).show()
-
             val intent = Intent(requireContext(), WelcomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
@@ -101,13 +107,55 @@ class ProfileFragment : Fragment() {
         return view
     }
 
+    private fun saveUserToFirestore(userModel: UserModel) {
+        val userDoc = firestore.collection("users").document(userModel.uid)
+
+        val userMap = mapOf(
+            "uid" to userModel.uid,
+            "name" to userModel.name,
+            "email" to userModel.email,
+            "photoUrl" to userModel.photoUrl,
+            "isAnonymous" to userModel.isAnonymous,
+            "isGoogle" to userModel.isGoogle
+        )
+
+        userDoc.set(userMap)
+            .addOnSuccessListener {
+                println("✅ Корисникот е зачуван во Firestore!")
+            }
+            .addOnFailureListener { e ->
+                println("❌ Firestore грешка: ${e.message}")
+            }
+    }
+
+
+    private fun saveUserToRoom(userModel: UserModel) {
+        val userEntity = UserEntity(
+            uid = userModel.uid,
+            name = userModel.name,
+            email = userModel.email,
+            photoUrl = userModel.photoUrl,
+            isAnonymous = userModel.isAnonymous,
+            isGoogle = userModel.isGoogle
+        )
+
+        val db = AppDatabase.getDatabase(requireContext())
+        val userDao = db.userDao()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            userDao.insertUser(userEntity)
+            println("✅ Корисникот е зачуван локално во Room!")
+        }
+    }
+
+
     private fun loadOrdersCount(userId: String?) {
         if (userId == null) {
             profileOrdersCountText.text = getString(R.string.order_count, 0)
             return
         }
 
-        db.collection("orders")
+        firestore.collection("orders")
             .whereEqualTo("userId", userId)
             .get()
             .addOnSuccessListener { result ->
